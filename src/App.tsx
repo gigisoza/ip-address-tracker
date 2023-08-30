@@ -2,6 +2,7 @@ import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import arrow from "./images/icon-arrow.svg";
 import background from "./images/pattern-bg-desktop.png";
+import icon from "./icon";
 
 //https://geo.ipify.org/api/v2/country?apiKey=at_3Viw0mpk1UvBQflfHamoLkQ9kVF85&ipAddress=8.8.8.8
 
@@ -83,14 +84,14 @@ function App() {
         <MapContainer
           center={[51.505, -0.09]}
           zoom={13}
-          scrollWheelZoom={false}
+          scrollWheelZoom={true}
           style={{ height: "700px", width: "100vw" }}
         >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          <Marker position={[51.505, -0.09]}>
+          <Marker icon={icon} position={[51.505, -0.09]}>
             <Popup>
               A pretty CSS3 popup. <br /> Easily customizable.
             </Popup>

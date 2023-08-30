@@ -1,3 +1,5 @@
+import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
 import arrow from "./images/icon-arrow.svg";
 import background from "./images/pattern-bg-desktop.png";
 
@@ -36,7 +38,11 @@ function App() {
           </form>
         </article>
 
-        <article className="bg-white rounded-lg shadow p-8 mx-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 max-w-6xl xl:mx-auto text-center md:text-left">
+        <article
+          className="bg-white rounded-lg shadow p-8 mx-8 grid grid-cols-1 gap-8 md:grid-cols-2 
+          lg:grid-cols-4 max-w-6xl xl:mx-auto text-center md:text-left lg:-mb-16 relative"
+          style={{ zIndex: 10000 }}
+        >
           <div className="lg:border-r lg:border-slate-400">
             <h2 className="uppercase text-sm font-bold text-slate-500 tracking-wider mb-3">
               Ip Address
@@ -73,6 +79,23 @@ function App() {
             </p>
           </div>
         </article>
+
+        <MapContainer
+          center={[51.505, -0.09]}
+          zoom={13}
+          scrollWheelZoom={false}
+          style={{ height: "700px", width: "100vw" }}
+        >
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <Marker position={[51.505, -0.09]}>
+            <Popup>
+              A pretty CSS3 popup. <br /> Easily customizable.
+            </Popup>
+          </Marker>
+        </MapContainer>
       </section>
     </>
   );

@@ -4,7 +4,7 @@ import { Address } from "./App";
 import { useEffect, useMemo } from "react";
 
 export default function Markerposition(props: null | Address) {
-  const { address } = props;
+  const { ...address } = props;
 
   const position = useMemo(() => {
     return [address.location.lat, address.location.lng];

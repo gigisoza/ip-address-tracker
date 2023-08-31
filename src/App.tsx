@@ -45,7 +45,6 @@ function App() {
         );
         const data = await res.json();
         setAddress(data);
-        console.log(data);
       };
 
       getInitialData();
@@ -169,7 +168,7 @@ function App() {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
-              <Markerposition address={address} />
+              <Markerposition {...address} />
             </MapContainer>
           </>
         )}

@@ -7,7 +7,14 @@ import icon from "./icon";
 
 type Address = {
   ip: string;
-  location: { country: string; region: string; timezone: string };
+  location: {
+    country: string;
+    region: string;
+    city: string;
+    lat: number;
+    lng: number;
+    timezone: string;
+  };
   domains: string[];
   as: {
     asn: number;
@@ -27,7 +34,7 @@ function App() {
     try {
       const getInitialData = async () => {
         const res = await fetch(
-          `https://geo.ipify.org/api/v2/country?apiKey=${
+          `https://geo.ipify.org/api/v2/country,city?apiKey=${
             import.meta.env.VITE_REACT_APP_API_KEY
           }&ipAddress=192.212.174.101`
         );
@@ -95,7 +102,8 @@ function App() {
                   location
                 </h2>
                 <p className="font-semibold text-slate-900 md:text-2xl xl:text-3xl">
-                  Brooklyn
+                  {address.location.country}, {address.location.city},{" "}
+                  {address.location.region}
                 </p>
               </div>
 
@@ -104,7 +112,7 @@ function App() {
                   Timezone
                 </h2>
                 <p className="font-semibold text-slate-900 md:text-2xl xl:text-3xl">
-                  UTC -05:00
+                  UTC {address.location.timezone}
                 </p>
               </div>
 
@@ -113,13 +121,13 @@ function App() {
                   ISP
                 </h2>
                 <p className="font-semibold text-slate-900 md:text-2xl xl:text-3xl">
-                  SpaceX
+                  {address.isp}
                 </p>
               </div>
             </article>
 
             <MapContainer
-              center={[51.505, -0.09]}
+              center={[address.location.lat, address.location.lng]}
               zoom={13}
               scrollWheelZoom={true}
               style={{ height: "700px", width: "100vw" }}
@@ -128,7 +136,10 @@ function App() {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
-              <Marker icon={icon} position={[51.505, -0.09]}>
+              <Marker
+                icon={icon}
+                position={[address.location.lat, address.location.lng]}
+              >
                 <Popup>
                   A pretty CSS3 popup. <br /> Easily customizable.
                 </Popup>
